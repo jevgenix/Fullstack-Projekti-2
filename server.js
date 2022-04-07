@@ -1,6 +1,7 @@
 // express added
 const express = require("express");
 const app = express();
+const port = 5000;
 
 // adding body parser
 const bodyParser = require("body-parser");
@@ -17,6 +18,6 @@ app.get("/", (req, res) => {
   res.render("pages/index");
 });
 
-app.listen(5000, function () {
-  console.log("Server listening on port 5000");
+app.listen(port, function () {
+  console.log("Server listening on port", port);
 });

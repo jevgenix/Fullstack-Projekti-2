@@ -166,13 +166,13 @@ function winner(playerA, playerA_hand, playerB, playerB_hand) {
 // sending img by user hand
 function hand(played) {
   if (played == "ROCK") {
-    return "<img src='/img/rock.png' alt='rock'>";
+    return "<img src='/img/rock.PNG' alt='rock'>";
   }
   if (played == "PAPER") {
-    return "<img src='/img/paper.png' alt='paper'>";
+    return "<img src='/img/paper.PNG' alt='paper'>";
   }
   if (played == "SCISSORS") {
-    return "<img src='/img/scissors.png' alt='scissors'>";
+    return "<img src='/img/scissors.PNG' alt='scissors'>";
   }
 }
 

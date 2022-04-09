@@ -31,6 +31,10 @@ for (const key in sorted) {
   console.log(`${key}: ${sorted[key]}`);
 }
 
+for (const [key, value] of Object.entries(sorted)) {
+  console.log(key, value);
+}
+
 // Game History Object
 // quick check
 let result = "Pekka Pekkanen";

@@ -8,14 +8,15 @@ const playerB_name = document.getElementById("playerB_name");
 const playerA_hand_img = document.getElementById("playerA_hand");
 const playerB_hand_img = document.getElementById("playerB_hand");
 
-// list element, where to parse html list code
-const data_list = document.querySelector(".data-list");
-
 // table element, where to parse html table code
 const table_element = document.getElementById("table");
+const scoreboard_element = document.getElementById("scoreboard");
 
 // creating Object for an array of objects
 let history = [];
+
+// scoreboard object
+let scoreboard = {};
 
 getSession(API_URL);
 function getSession(url) {
@@ -23,22 +24,12 @@ function getSession(url) {
     .then((res) => res.json())
     .then((data) => {
       const progress = data.data;
-
       // console.log(data);
       // console.log(progress.length - 1);
-
-      // HTML list element
-      const data_li_element = document.createElement("li");
-
-      // data implementation
-      data_li_element.innerText = "Testi";
-      data_li_element.classList.add("data-list-item");
-      data_list.appendChild(data_li_element);
-
       // counter for our interval
       let counter = 0;
       // setInterval is like a forloop, but with time out
-      const i = setInterval(() => {
+      const interval = setInterval(() => {
         let result = winner(
           progress[counter].playerA.name,
           progress[counter].playerA.played,
@@ -88,10 +79,44 @@ function getSession(url) {
         table += "</tbody></table>";
         table_element.innerHTML = table;
 
+        if (result != "Tie!") {
+          scoreboardObj(result);
+        }
+
+        // Sorting scoreboard Object by highest score
+        let sorted = Object.entries(scoreboard)
+          .sort(([, v1], [, v2]) => v2 - v1)
+          .reduce(
+            (obj, [k, v]) => ({
+              ...obj,
+              [k]: v,
+            }),
+            {}
+          );
+
+        let scoreboard_table = "<table class='table table-striped'>";
+        scoreboard_table += ` 
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope='col'> Name </th>
+                          <th scope='col'> Score </th>
+                        </tr>
+                      </thead>`;
+        let index = 1;
+        for (const [key, value] of Object.entries(sorted)) {
+          //console.log(key, value);
+          scoreboard_table += `<tbody><tr><th scope='row'> ${index++} </th>`;
+          scoreboard_table += "<td>" + key + "</td>";
+          scoreboard_table += "<td>" + value + "</td></tr>";
+        }
+        scoreboard_table += "</tbody></table>";
+        scoreboard_element.innerHTML = scoreboard_table;
+
         counter++;
 
         if (counter == progress.length - 1) {
-          clearInterval(i);
+          clearInterval(interval);
         }
       }, 5000);
     });
@@ -138,6 +163,7 @@ function winner(playerA, playerA_hand, playerB, playerB_hand) {
   }
 }
 
+// sending img by user hand
 function hand(played) {
   if (played == "ROCK") {
     return "<img src='/img/rock.png' alt='rock'>";
@@ -150,6 +176,7 @@ function hand(played) {
   }
 }
 
+// pushing data into table
 function objectArray(playerA, playerB, playerA_hand, playerB_hand, result) {
   history.push({
     playerA: playerA,
@@ -160,6 +187,10 @@ function objectArray(playerA, playerB, playerA_hand, playerB_hand, result) {
   });
 }
 
-// function sortedObject() {
-//
-// }
+function scoreboardObj(name) {
+  if (Object.keys(scoreboard).includes(name)) {
+    scoreboard[name] += 1;
+  } else {
+    scoreboard[name] = 1;
+  }
+}

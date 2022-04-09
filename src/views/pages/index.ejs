@@ -8,7 +8,7 @@
   </style>
 </head>
 
-<body class="container">
+<body>
   <header>
     <div class="headline"><%- include('../partials/img.ejs') %></div>
   </header>
@@ -18,19 +18,10 @@
     <%- include('../partials/game_session.ejs') %>
 
     <!--Data and statistics-->
-    <div class="jumbotron">
-      <h1 style="text-align:center">Data and Statistics</h1>
-      <div id="data" class="data">
-        <div id="table" class="table">
-
-        </div>
-
-        <ul class="data-list" id="data-list">
-        </ul>
-      </div>
-    </div>
+    <%- include('../partials/statistics.ejs') %>
   </main>
   <script src="js/game.js" type="text/javascript"></script>
+  <script src="js/selector.js" type="text/javascript"></script>
 </body>
 
 </html>

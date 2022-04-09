@@ -1,5 +1,6 @@
 // setting api-url
-const API_URL = "https://bad-api-assignment.reaktor.com/rps/history";
+const API_URL =
+  "https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/rps/history";
 
 // needed variables to output game session
 const session_result = document.getElementById("result");

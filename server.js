@@ -1,12 +1,13 @@
 // express added
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 
 // adding body parser
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cors());
 // Use static content from public dir
 app.use(express.static("public"));
 app.use("/css", express.static(__dirname + "/css"));

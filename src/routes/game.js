@@ -2,7 +2,9 @@
 const express = require("express");
 const gameRouter = express.Router();
 const axios = require("axios");
+const cors = require("cors");
 
+gameRouter.use(cors());
 gameRouter.get("/", async (req, res) => {
   // res.render("pages/index");
   try {

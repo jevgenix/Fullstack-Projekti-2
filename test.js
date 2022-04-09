@@ -1,6 +1,5 @@
 // test code for next implementation
-
-// creating an Object
+// creating an Score Object
 let data = {
   "Pekka Pekkanen": 10,
   "Outi Outinen": 15,
@@ -13,7 +12,7 @@ let data = {
 let nimi = "Kimmo Kimmonen";
 data[nimi] = 22;
 
-// Sorting Objects by value
+// Sorting Objects by highest score
 let sorted = Object.entries(data)
   .sort(([, v1], [, v2]) => v2 - v1)
   .reduce(
@@ -31,3 +30,42 @@ console.log(sorted);
 for (const key in sorted) {
   console.log(`${key}: ${sorted[key]}`);
 }
+
+// Game History Object
+// quick check
+let result = "Pekka Pekkanen";
+
+// Object Created
+let history = [
+  {
+    playerA: "Pekka Pekkanen",
+    playerB: "Outi Outinen",
+    playerA_played: "scissors",
+    playerB_played: "paper",
+    result: result,
+  },
+  {
+    playerA: "Jarmo Jarmonen",
+    playerB: "Antti Anttinen",
+    playerA_hand: "paper",
+    playerB_hand: "rock",
+    result: "Jarmo Jarmonen",
+  },
+];
+
+// log the object
+console.log(history);
+
+// pushing new data into the object
+history.push({
+  playerA: "Vilma Vilmanen",
+  playerB: "Alla Allonen",
+  playerA_played: "scissors",
+  playerB_played: "rock",
+  result: "Alla Allonen",
+});
+
+// looping through the object, finding all the data needed
+history.forEach((res) => {
+  console.log(res.playerA, res.playerB, res.result);
+});

@@ -2,6 +2,14 @@
 
 ### This is a second project for full stack programming course in Laurea.
 
+## What it does
+
+#### This app simply displays rock-paper-scissors game session in pseudo live mode.
+
+#### App outputs players game session, images (for example scissors vs paper), player who won the game, and other iformation. After session app pushing/sorting and pushing all needed information into objects, which outputs table data into html code.
+
+## How it was builded
+
 #### App is connected to Reaktor API.
 
 #### I had to use axios to have a connection to API data, otherwise it would not be possible due to CORS-Error. After I connected to API using axios I sended all API data into the local JSON file.

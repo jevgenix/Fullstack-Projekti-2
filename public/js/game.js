@@ -19,19 +19,19 @@ let history = [];
 // scoreboard object
 let scoreboard = {};
 
+// fetching data from /json
 getSession("/json");
 function getSession(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
       const progress = data.data;
-      console.log(progress);
-      // console.log(data);
-      // console.log(progress.length - 1);
+
       // counter for our interval
       let counter = 0;
-      // setInterval is like a forloop, but with time out
+      // setInterval is like a forloop, but with time out.
       const interval = setInterval(() => {
+        // sending each data into winner function
         let result = winner(
           progress[counter].playerA.name,
           progress[counter].playerA.played,
@@ -69,7 +69,7 @@ function getSession(url) {
                         <th scope='col'> Winner </th>
                       </tr>
                     </thead>`;
-
+        // loop every object item to create table, index works as counter
         history.forEach((session, index) => {
           table += `<tbody><tr><th scope='row'> ${index + 1} </th>`;
           table += "<td>" + session.playerA + "</td>";
@@ -81,6 +81,8 @@ function getSession(url) {
         table += "</tbody></table>";
         table_element.innerHTML = table;
 
+        // sending data to scoreboardObj function, implements our scoreboard
+        // if result is not Tie, it sends winners name
         if (result != "Tie!") {
           scoreboardObj(result);
         }
@@ -96,6 +98,7 @@ function getSession(url) {
             {}
           );
 
+        // creating scoreboard table
         let scoreboard_table = "<table class='table table-striped'>";
         scoreboard_table += ` 
                       <thead>
@@ -105,9 +108,9 @@ function getSession(url) {
                           <th scope='col'> Score </th>
                         </tr>
                       </thead>`;
+        // here we dont use forEach, so we need to create index manually
         let index = 1;
         for (const [key, value] of Object.entries(sorted)) {
-          //console.log(key, value);
           scoreboard_table += `<tbody><tr><th scope='row'> ${index++} </th>`;
           scoreboard_table += "<td>" + key + "</td>";
           scoreboard_table += "<td>" + value + "</td></tr>";
@@ -115,8 +118,8 @@ function getSession(url) {
         scoreboard_table += "</tbody></table>";
         scoreboard_element.innerHTML = scoreboard_table;
 
+        // now we add to counter value to counter, if value equals progress.length - 1, interval stops.
         counter++;
-
         if (counter == progress.length - 1) {
           clearInterval(interval);
         }
@@ -131,6 +134,7 @@ function winner(playerA, playerA_hand, playerB, playerB_hand) {
   const p = "PAPER";
   const s = "SCISSORS";
 
+  // sending information into html code
   playerA_name.innerHTML = playerA;
   playerB_name.innerHTML = playerB;
   playerA_hand_img.innerHTML = hand(playerA_hand);
@@ -189,6 +193,8 @@ function objectArray(playerA, playerB, playerA_hand, playerB_hand, result) {
   });
 }
 
+// if scoreboard have winners name already, it will add new value to score
+// else it creates object with key and value
 function scoreboardObj(name) {
   if (Object.keys(scoreboard).includes(name)) {
     scoreboard[name] += 1;

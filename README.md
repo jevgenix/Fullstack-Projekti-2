@@ -4,7 +4,7 @@
 
 #### App is connected to Reaktor API.
 
-#### I had to use axios to have a connection to API data, otherwise it would not be possible due to CORS-Error. After I connected to API using axios I sended all API data to a JSON file.
+#### I had to use axios to have a connection to API data, otherwise it would not be possible due to CORS-Error. After I connected to API using axios I sended all API data into the local JSON file.
 
 #### Data sended to JSON file is not duplicated, because of statement which checks data by id.
 

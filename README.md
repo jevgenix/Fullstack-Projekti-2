@@ -26,3 +26,4 @@
 - express
 - vanilla js
 - sass/css
+- bootstrap

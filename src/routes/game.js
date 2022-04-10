@@ -1,20 +1,33 @@
 // express added
 const express = require("express");
 const gameRouter = express.Router();
+const fs = require("fs");
 const axios = require("axios");
-const cors = require("cors");
+// adding body parser
+const bodyParser = require("body-parser");
+gameRouter.use(bodyParser.urlencoded({ extended: true }));
 
-gameRouter.use(cors());
 gameRouter.get("/", async (req, res) => {
-  // res.render("pages/index");
   try {
     const gameAPI = await axios.get(
       "https://bad-api-assignment.reaktor.com/rps/history"
     );
 
-    const key = gameAPI.data.cursor;
+    let dataJson = JSON.parse(fs.readFileSync("./data.json"));
     const data = gameAPI.data.data;
 
+    data.forEach((item) => {
+      let id = data.gameId;
+      if (!dataJson.data.includes(id)) {
+        dataJson.data.push(item);
+      }
+    });
+
+    let jsonStr = JSON.stringify(dataJson);
+    fs.writeFile("src/routes/data.json", jsonStr, (err) => {
+      if (err) throw err;
+      console.log("Data sended to json file!");
+    });
     res.render("pages/index");
   } catch (err) {
     if (err.response) {
@@ -27,6 +40,11 @@ gameRouter.get("/", async (req, res) => {
       console.error("Error", err.message);
     }
   }
+});
+
+gameRouter.get("/json", (req, res) => {
+  let dataJson = JSON.parse(fs.readFileSync("src/routes/data.json"));
+  res.send(dataJson);
 });
 
 module.exports = gameRouter;

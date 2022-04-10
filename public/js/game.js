@@ -1,6 +1,6 @@
 // setting api-url
-const API_URL =
-  "https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/rps/history";
+// this API is not working properly due to CORS-error
+const API_URL = "https://bad-api-assignment.reaktor.com/rps/history";
 
 // needed variables to output game session
 const session_result = document.getElementById("result");
@@ -19,12 +19,13 @@ let history = [];
 // scoreboard object
 let scoreboard = {};
 
-getSession(API_URL);
+getSession("/json");
 function getSession(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
       const progress = data.data;
+      console.log(progress);
       // console.log(data);
       // console.log(progress.length - 1);
       // counter for our interval

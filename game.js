@@ -1,7 +1,7 @@
-// import fetch to our frontend.js
-// deleted from package.json "type": "module",
+// this file is a test file to implement game logic
 
 // setting api-url
+// this API is not working properly due to CORS-error
 const API_URL = "https://bad-api-assignment.reaktor.com/rps/history";
 
 let game = document.getElementById("game-results");

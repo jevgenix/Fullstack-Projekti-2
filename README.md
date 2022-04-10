@@ -1,4 +1,4 @@
-# 2. Full Stack Project: 2
+# 2. Full Stack Project: 2, Rock Paper Scissors
 
 ### This is a second project for full stack programming course in Laurea.
 

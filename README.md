@@ -6,7 +6,7 @@
 
 #### This app simply displays rock-paper-scissors game session in pseudo live mode.
 
-#### App outputs players game session, images (for example scissors vs paper), player who won the game, and other iformation. After session app pushing/sorting and pushing all needed information into objects, which outputs table data into html code.
+#### App outputs players game session every 5 seconds, images (for example scissors vs paper), player who won the game, and other iformation. After session app pushing/sorting and pushing all needed information into objects, which outputs table data into html code.
 
 ## How it was builded
 

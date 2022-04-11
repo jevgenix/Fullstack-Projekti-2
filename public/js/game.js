@@ -49,8 +49,8 @@ function getSession(url) {
         // into history array
         objectArray(
           progress[counter].playerA.name,
-          progress[counter].playerA.played,
           progress[counter].playerB.name,
+          progress[counter].playerA.played,
           progress[counter].playerB.played,
           result
         );

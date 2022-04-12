@@ -13,11 +13,16 @@ const playerB_hand_img = document.getElementById("playerB_hand");
 const table_element = document.getElementById("table");
 const scoreboard_element = document.getElementById("scoreboard");
 
+// timer
+const t = document.getElementById("timer");
+
 // creating Object for an array of objects
 let history = [];
 
 // scoreboard object
 let scoreboard = {};
+
+countdown();
 
 // fetching data from /json
 getSession("/json");
@@ -28,9 +33,11 @@ function getSession(url) {
       const progress = data.data;
 
       // counter for our interval
-      let counter = 0;
+      let counter = 5;
       // setInterval is like a forloop, but with time out.
       const interval = setInterval(() => {
+        // timer for next session
+        countdown();
         // sending each data into winner function
         let result = winner(
           progress[counter].playerA.name,
@@ -201,4 +208,20 @@ function scoreboardObj(name) {
   } else {
     scoreboard[name] = 1;
   }
+}
+
+function countdown() {
+  let time_left = 1;
+
+  let timer = setInterval(() => {
+    if (time_left == 5) {
+      clearInterval(timer);
+    }
+
+    t.innerHTML = `<h1 style="text-align:center" id="timer">Next session starts in ${
+      5 - time_left
+    }</h1>`;
+
+    time_left += 1;
+  }, 1000);
 }
